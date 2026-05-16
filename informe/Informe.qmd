@@ -1,0 +1,352 @@
+---
+title: "Jalisco"
+author: 
+  - "Viviana Vergara Galindo"
+  - "Claudia Areli Avila Melgarejo"
+date: "2026-05-15"
+format: 
+  pdf:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    colorlinks: true
+    keep-tex: false
+editor: visual
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(readxl)
+library(data.table)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(kableExtra)
+library(lubridate)
+```
+
+# a) Introducción
+
+El estado de Jalisco, ubicado en la región occidente de México, es una de las entidades con mayor población del país. De acuerdo con el Censo de Población y Vivienda 2020, cuenta con alrededor de 8.3 millones de habitantes, cifra que ha seguido aumentando en los últimos años. Su población se concentra principalmente en zonas urbanas, especialmente en la Zona Metropolitana de Guadalajara, donde vive más de la mitad de los jaliscienses.
+
+**Factores que afectan la mortalidad en Jalisco:**
+
+-   **Enfermedades crónicas:** Alta prevalencia de diabetes, enfermedades cardíacas y obesidad
+-   **Violencia:** Tasas elevadas de homicidios, afectando principalmente a hombres jóvenes
+-   **Envejecimiento poblacional:** Aumento de la población de 60 años y más
+-   **COVID-19:** Impacto significativo en 2021, especialmente en adultos mayores
+
+# b) Diagrama de Flujo
+
+![Diagrama de flujo del proceso de construcción de tablas de vida](content.png)
+
+*Fuente: Elaboración propia.*
+
+# c) Fórmulas utilizadas
+
+## Tasa específica de mortalidad
+
+$$
+m_x = \frac{D_x}{N_x}
+$$
+
+## Probabilidad de morir entre las edades $x$ y $x+n$
+
+$$
+q_x = \frac{n \cdot m_x}{1 + (n - a_x) \cdot m_x}
+$$
+
+## Coeficientes $a_x$ (método de Coale-Demeny)
+
+Para la edad 0 (primer año de vida):
+
+$$
+a_0 = \begin{cases} 
+0.330 & \text{si } m_0 \ge 0.107 \text{ (hombres)} \\ 
+0.350 & \text{si } m_0 \ge 0.107 \text{ (mujeres)} \\ 
+0.045 + 2.684 \cdot m_0 & \text{si } m_0 < 0.107 \text{ (hombres)} \\ 
+0.053 + 2.800 \cdot m_0 & \text{si } m_0 < 0.107 \text{ (mujeres)}
+\end{cases}
+$$
+
+Para el grupo de 1 a 4 años:
+
+$$
+a_1 = \begin{cases}
+1.352 & \text{si } m_0 \ge 0.107 \text{ (hombres)} \\
+1.361 & \text{si } m_0 \ge 0.107 \text{ (mujeres)} \\
+1.651 - 2.816 \cdot m_0 & \text{si } m_0 < 0.107 \text{ (hombres)} \\
+1.522 - 1.518 \cdot m_0 & \text{si } m_0 < 0.107 \text{ (mujeres)}
+\end{cases}
+$$
+
+Para el resto de grupos de edad (excepto el último): $a_x = n/2$
+
+## Sobrevivientes
+
+$$
+l_{x+n} = l_x \cdot (1 - q_x), \quad l_0 = 100,000
+$$
+
+## Años persona vividos
+
+Para grupos cerrados ($n$ finito):
+
+$$
+L_x = n \cdot l_{x+n} + a_x \cdot d_x
+$$
+
+Para el último grupo abierto:
+
+$$
+L_{\omega} = \frac{l_{\omega}}{m_{\omega}}
+$$
+
+## Esperanza de vida
+
+$$
+e_x = \frac{T_x}{l_x}, \quad T_x = \sum_{i=x}^{\omega} L_i
+$$
+
+## Crecimiento exponencial (para estimación de población intercensal)
+
+$$
+P(t) = P_0 \cdot e^{rt}, \quad r = \frac{\ln(P_t/P_0)}{t - t_0}
+$$
+
+# d) Código utilizado
+
+El código completo del análisis está disponible en el repositorio de GitHub:
+
+🔗 <https://github.com/VivianaVergara05/Jalisco-Demography>
+
+**Funciones principales:**
+
+-   `lt_abr()`: Construcción de tablas de vida abreviadas (método Coale-Demeny)
+-   `crecimiento_exp()`: Estimación de población intercensal
+-   Procesamiento de datos de INEGI y CONAPO
+
+## Tablas de vida completas
+
+A continuación se presentan las tablas de vida abreviadas para cada año y sexo
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+library(knitr)
+library(kableExtra)
+
+tablas_vida <- readRDS("C:\\Users\\vivim\\OneDrive\\Desktop\\Demografia Jalisco\\Demography\\Jalisco-Demography\\output\\tablas\\tablas_vida_completas.rds")
+
+```
+
+### 2010 - Hombres
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+kable(tablas_vida$lt_2010_h[, c("edad", "x", "n", "mx", "qx", "lx", "dx", "ex")], 
+      format = "latex", 
+      booktabs = TRUE, 
+      longtable = TRUE,      # IMPORTANTE: Permite que la tabla use varias páginas
+      escape = FALSE, 
+      digits = c(0, 0, 0, 6, 6, 0, 0, 2),
+      caption = "Tabla de vida - Jalisco 2010, Hombres",
+      col.names = c("Edad", "x", "n", "$m_x$", "$q_x$", "$l_x$", "$d_x$", "$e_x$")) %>%
+  kable_styling(latex_options = c("striped", "repeat_header"), # Repite el título en cada hoja
+                font_size = 9) # Un poco más pequeña para que quepa bien
+
+```
+
+### 2010 - Mujeres
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| results: asis
+
+tabla_2010_m <- tablas_vida$lt_2010_m[, c("edad", "x", "n", "mx", "qx", "lx", "dx", "ex")]
+
+kable(tabla_2010_m, 
+      caption = "Tabla de vida - Jalisco 2010, Mujeres",
+      col.names = c("Edad", "x", "n", "mx", "qx", "lx", "dx", "e₀"),
+      digits = c(NA, 0, 0, 6, 6, 0, 0, 2),
+      align = "lccccccc") %>%
+  kable_styling(latex_options = c("striped", "hold_position", "scale_down"))
+
+```
+
+### 2019 - Hombres
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| results: asis
+
+tabla_2019_h <- tablas_vida$lt_2019_h[, c("edad", "x", "n", "mx", "qx", "lx", "dx", "ex")]
+
+kable(tabla_2019_h, 
+      caption = "Tabla de vida - Jalisco 2019, Hombres",
+      col.names = c("Edad", "x", "n", "mx", "qx", "lx", "dx", "e₀"),
+      digits = c(NA, 0, 0, 6, 6, 0, 0, 2),
+      align = "lccccccc") %>%
+  kable_styling(latex_options = c("striped", "hold_position", "scale_down"))
+
+```
+
+### 2019 - Mujeres
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| results: asis
+
+tabla_2019_m <- tablas_vida$lt_2019_m[, c("edad", "x", "n", "mx", "qx", "lx", "dx", "ex")]
+
+kable(tabla_2019_m, 
+      caption = "Tabla de vida - Jalisco 2019, Mujeres",
+      col.names = c("Edad", "x", "n", "mx", "qx", "lx", "dx", "e₀"),
+      digits = c(NA, 0, 0, 6, 6, 0, 0, 2),
+      align = "lccccccc") %>%
+  kable_styling(latex_options = c("striped", "hold_position", "scale_down"))
+```
+
+### 2021 - Hombres
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| results: asis
+
+tabla_2021_h <- tablas_vida$lt_2021_h[, c("edad", "x", "n", "mx", "qx", "lx", "dx", "ex")]
+
+kable(tabla_2021_h, 
+      caption = "Tabla de vida - Jalisco 2021, Hombres",
+      col.names = c("Edad", "x", "n", "mx", "qx", "lx", "dx", "e₀"),
+      digits = c(NA, 0, 0, 6, 6, 0, 0, 2),
+      align = "lccccccc") %>%
+  kable_styling(latex_options = c("striped", "hold_position", "scale_down"))
+```
+
+### 2021 - Mujeres
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| results: asis
+
+tabla_2021_m <- tablas_vida$lt_2021_m[, c("edad", "x", "n", "mx", "qx", "lx", "dx", "ex")]
+
+kable(tabla_2021_m, 
+      caption = "Tabla de vida - Jalisco 2021, Mujeres",
+      col.names = c("Edad", "x", "n", "mx", "qx", "lx", "dx", "e₀"),
+      digits = c(NA, 0, 0, 6, 6, 0, 0, 2),
+      align = "lccccccc") %>%
+  kable_styling(latex_options = c("striped", "hold_position", "scale_down"))
+```
+
+# e) Esperanzas de vida al nacer
+
+```{r, echo=FALSE, results='asis'}
+
+library(knitr)
+
+tabla_e0 <- data.frame( Año = c(2010, 2010, 2019, 2019, 2021, 2021), Sexo = rep(c("Hombres", "Mujeres"), 3), e0 = c(73.45, 78.68, 73.03, 79.28, 67.81, 75.16) )
+
+kable(tabla_e0, caption = "Esperanza de vida al nacer por sexo y año", col.names = c("Año", "Sexo", "Esperanza de vida (años)"))
+```
+
+# f) Gráficas
+
+## Evolución de la esperanza de vida
+
+```{r}
+#| label: fig-evolucion
+#| fig.cap: "Evolución de la esperanza de vida al nacer en Jalisco (2010-2021)"
+#| echo: false
+#| warning: false
+#| message: false
+#| 
+library(ggplot2)
+
+ggplot(tabla_e0, aes(x = Año, y = e0, color = Sexo, group = Sexo)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 3) +
+  labs(x = "Año", y = "Esperanza de vida (años)", color = "Sexo") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  scale_color_manual(values = c("Hombres" = "#2E86AB", "Mujeres" = "#A23B72")) +
+  scale_x_continuous(breaks = c(2010, 2019, 2021))
+```
+
+## Curvas de supervivencia (lx)
+
+```{r}
+#| label: fig-lx
+#| fig.cap: "Curvas de supervivencia comparativas (2019 vs 2021)"
+#| echo: false
+#| warning: false
+#| message: false
+#| 
+# Cargar tablas de vida completas
+tablas_vida <- readRDS("C:\\Users\\vivim\\OneDrive\\Desktop\\Demografia Jalisco\\Demography\\Jalisco-Demography\\output\\tablas\\tablas_vida_completas.rds")
+
+# Extraer lx para 2019 y 2021
+lx_data <- data.frame()
+
+for (key in names(tablas_vida)) {
+  lt <- tablas_vida[[key]]
+  # Crear un índice numérico para el eje x
+  lt$idx <- 1:nrow(lt)
+  
+  lx_data <- rbind(lx_data,
+                   data.frame(
+                     idx = lt$idx,
+                     edad = lt$edad,
+                     lx = lt$lx,
+                     Año = lt$año,
+                     Sexo = lt$sexo
+                   ))
+}
+
+# Filtrar solo 2019 y 2021
+lx_compare <- lx_data %>% filter(Año %in% c(2019, 2021))
+
+# Gráfica corregida
+ggplot(lx_compare, aes(x = idx, y = lx, color = factor(Año), linetype = Sexo)) +
+  geom_line(size = 1) +
+  labs(x = "Grupo de edad", y = "Sobrevivientes (lx)", color = "Año", linetype = "Sexo") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  scale_color_manual(values = c("2019" = "#1B998B", "2021" = "#E84855"))
+```
+
+## Tasas específicas de mortalidad (mx)
+
+```{r}
+#| label: fig-mx
+#| fig.cap: "Tasas específicas de mortalidad por edad (escala logarítmica)"
+#| echo: false
+#| warning: false
+#| message: false
+
+# Cargar tablas de vida completas
+tablas_vida <- readRDS("C:\\Users\\vivim\\OneDrive\\Desktop\\Demografia Jalisco\\Demography\\Jalisco-Demography\\output\\tablas\\tablas_vida_completas.rds")
+
+# Extraer mx
+mx_data <- data.frame()
+
+for (key in names(tablas_vida)) {
+  lt <- tablas_vida[[key]]
+  # Crear índice numérico
+  lt$idx <- 1:nrow(lt)
+  
+  mx_data <- rbind(mx_data,
+                   data.frame(
+                     idx = lt$idx,
+                     mx = lt$mx,
+                     Año = lt$año,
+                     Sexo = lt$sexo
+                   ))
+}
+
+# Eliminar valores NA o cero para escala log
+mx_plot <- mx_data %>% filter(!is.na(mx), mx > 0)
+
+# Gráfica corregida
+ggplot(mx_plot, aes(x = idx, y = mx, color = factor(Año))) +
+  geom_line(size = 1) +
+  scale_y_log10() +
+  facet_wrap(~Sexo, scales = "free_y") +
+  labs(x = "Grupo de edad", y = "log10(mx)", color = "Año") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+# g) Análisis de resultados

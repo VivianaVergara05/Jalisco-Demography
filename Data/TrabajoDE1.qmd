@@ -1,0 +1,391 @@
+---
+title: "Trabajo Demografia Jalisco"
+author: 
+  - "Viviana Vergara Galindo"
+  - "Claudia Areli Avila Melgarejo "
+format: pdf
+editor: visual
+---
+
+# ^~[Jalisco]{.smallcaps}~^
+
+## introducción
+
+El estado de Jalisco, ubicado en la región occidente de México, es una de las entidades con mayor población del país. De acuerdo con el Censo de Población y Vivienda 2020, cuenta con alrededor de 8.3 millones de habitantes, cifra que ha seguido aumentando en los últimos años. Su población se concentra principalmente en zonas urbanas, especialmente en la Zona Metropolitana de Guadalajara, donde vive más de la mitad de los jaliscienses. Además, Jalisco presenta una población relativamente joven, con una edad mediana cercana a los 29 años, lo que influye en la demanda de empleo, educación y vivienda. El crecimiento poblacional y la urbanización han generado importantes cambios sociales y económicos en el estado. La distribución casi equilibrada entre hombres y mujeres, junto con los procesos de migración interna, han transformado la dinámica de los municipios, especialmente en las áreas metropolitanas. Estos factores representan retos para la planeación del desarrollo, el acceso a servicios públicos y la mejora de la calidad de vida de la población, por lo que el análisis demográfico resulta clave para la toma de decisiones y el diseño de políticas públicas en Jalisco.
+
+## Lectura del primer objeto de la web
+
+El presente código en R tiene como objetivo realizar una lectura de la tabla de poblacion mitad de año de las estimaciones-proyecciones
+
+### 1 .Limpieza del entorno de trabajo
+
+```{r}
+rm(list = ls())
+```
+
+Esta instrucción elimina todos los objetos almacenados en la memoria de R. Se utiliza para asegurar que el análisis se realice en un entorno limpio, evitando conflictos con variables creadas previamente.
+
+### 2. Instalación de paquetes
+
+```{r,message=FALSE, warning=FALSE}
+library(readxl)
+library(data.table)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(kableExtra)
+library(lubridate)
+```
+
+### 4. Descarga y carga de la base de datos
+
+```{r,message=FALSE, warning=FALSE}
+
+pop <- fread("https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv")
+
+```
+
+Esta línea descarga directamente desde internet un archivo CSV con proyecciones de población de México para el periodo 1950–2070, y lo guarda en el objeto pop.
+
+### 5. Exploración inicial de la base de datos
+
+```{r}
+table(pop$ENTIDAD)
+table(pop$CVE_GEO)
+table(pop$ANIO)
+
+names(pop)
+sum(pop$POBLACION)
+```
+
+### 6.
+
+```{r}
+jl <- pop[ ENTIDAD == "Jalisco" & ANIO == "2026", .(SEXO, EDAD, POBLACION)]
+write.table(jl, "clipboard", row.names = F)
+```
+
+### Piramide
+
+```{r,echo=FALSE, eval=TRUE,fig.height=5, fig.width=8}
+piramide <- jl %>%
+mutate(
+POBLACION = ifelse(SEXO == "Hombres", -POBLACION, POBLACION)
+)
+ggplot(piramide, aes(x = EDAD, y = POBLACION, fill = SEXO)) +
+geom_bar(stat = "identity", width = 0.9) +
+coord_flip() +
+scale_y_continuous(labels = abs) +
+scale_fill_manual(values = c("Hombres" = "steelblue", "Mujeres" = "pink")) +
+labs(
+title = "Pirámide poblacional de Jalisco, 2026",
+x = "Edad",
+y = "Población",
+fill = "Sexo"
+) +
+theme_minimal()
+```
+
+En la pirámide poblacional de Jalisco para el año 2026 se observa que la parte inferior es más angosta, lo que indica que hay menos población en edades jóvenes. Esto sugiere que en los últimos años han nacido menos personas que en décadas anteriores. Se observa que en la parte central de la pirámide es la más ancha, especialmente entre los 30 y 60 años, lo que muestra que la mayor parte de la población se encuentra en edad adulta y activa, es decir estan en una edad favorable para trabajar y sostener la economia. Por otro lado en la parte superior, la cual corressponde a las edades mayores, la pirámide se reduce un poco pero sigue manteniendose relativamnete amplea , por lo que podemos deducir que cada vez más personas alcanzan edades avanzadas. En estas edades se nota una ligera mayor presencia de mujeres que de hombres, algo común porque las mujeres tienen menos probabilidad de muerte. Nuestra priramide muestra que Jalisco es un estado con una población mayormente adulta, con menos niños. Esto implica la necesidad de aprovechar la población en edad productiva y, asi mismo, prepararse para atender a una población envejecida en el futuro.
+
+#### 1. Lectura de tabla del mismo proyecto
+
+```{r}
+
+deaths <- fread("Data/MX_ARG_GUA.csv")
+kable(deaths, caption = "Muertes Argentina y Guatemala")
+```
+
+#### 2. Escritura de funciones
+
+```{r}
+weight_mean <- function(x,
+                        w=rep(1/length(x), length(x))){
+  
+  x_mean <- (sum(x*w)/sum(w))
+  return(x_mean)
+}
+
+#ejemplo 
+
+weight_mean(c(10,40),c(.3,.7)) # con pesos 
+```
+
+#### 3. Crecimiento exponencial
+
+```{r}
+
+expo <- function(K_0, K_T, t_0, t_T, t){
+  
+  dt <- decimal_date(as.Date(t_T)) - 
+decimal_date(as.Date(t_0))
+  
+  r <- log(K_T/K_0)/dt
+
+  h <- t - decimal_date(as.Date(t_0))
+  K_h <- K_0 * exp(r*h)
+
+  return(K_h)
+
+}
+
+cre_exp <- expo( K_0=112336538, K_T=126014024,
+                 t_0="2010-06-25", t_T="2020-03-15",
+                 t=seq(2020.5, 2100.5, 1)
+)
+
+# Gráfica
+data.frame(Año = c(decimal_date(as.Date("2010-06-25")),
+                   decimal_date(as.Date("2020-03-15")), seq(2020.5, 2100.5, 1)),
+           K_t  = c(112336538, 126014024, cre_exp)) %>%
+  ggplot(aes(Año, K_t)) +
+  geom_line() +
+  geom_point()
+```
+
+Ts bruts y especifics
+
+```{r}
+deaths
+```
+
+.
+
+```{r}
+deaths <- deaths %>%
+  mutate(m_x = D/N)
+
+plot(deaths[location == "Argentina",x]#eje x 
+     ,log(deaths[location == "Argentina",m_x]))#eje y
+
+#t brut de mort 
+deaths %>%
+  group_by(location) %>%
+  summarise(weight_mean(m_x, x/sum(x)))
+```
+
+}
+
+```{r}
+options(timeout = 600)
+```
+
+```{r}
+ mort <- fread("https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Life_Table_Complete_Medium_Female_1950-2023.csv.gz")
+```
+
+.
+
+```{r}
+ apv <- fread("https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz")
+```
+
+```{r}
+ruta_archivo <- r"(C:\Users\vivim\OneDrive\Documentos\DEMOGR\TablaMortalidadR.xlsx)"
+```
+
+```{r}
+Tabla_1998 <- read_excel(ruta_archivo, 
+                    sheet = 1) %>% 
+  rename(
+    x = 1,
+    n = 2,
+    N = 3,
+    D = 4
+  ) %>% 
+  mutate(
+    x = as.numeric(x),
+    n = as.numeric(n),
+    N = as.numeric(N),
+    D = as.numeric(D),
+    mx = D / N
+  )
+  lt_abr <- function(x, n, mx, sex = "f", IMR = NA) {
+  m <- length(x)
+  ax <- n / 2
+  
+  # Coeficientes para a0 (Edad 0)
+  if (sex == "m") { 
+    ax[1] <- ifelse(mx[1] >= 0.107, 0.330, 0.045 + 2.684 * mx[1])
+  } else {
+    ax[1] <- ifelse(mx[1] >= 0.107, 0.350, 0.053 + 2.800 * mx[1])
+  }
+  
+  # Coeficientes para 4a1 (Edad 1-4)
+  if (sex == "m") { 
+    ax[2] <- ifelse(mx[1] >= 0.107, 1.352, 1.651 - 2.816 * mx[1]) # Corregido signo -
+  } else {
+    ax[2] <- ifelse(mx[1] >= 0.107, 1.361, 1.522 - 1.518 * mx[1])
+  }
+  
+  # Probabilidad de morir qx
+  qx <- (n * mx) / (1 + (n - ax) * mx)
+  qx[m] <- 1 
+  
+  # Probabilidad de sobrevivir px
+  px <- 1 - qx 
+  
+  # Sobrevivientes lx (Radix 100,000)
+  # Usamos c(1, px[-m]) para que el primer valor sea 1 y luego multiplique
+  lx <- 100000 * cumprod(c(1, px[-m]))
+  
+  # Muertes dx (CORREGIDO: quitamos c[...] por c(...) )
+  dx <- c(-diff(lx), lx[m])
+  
+  # Años vividos Lx
+  Lx <- n * c(lx[-1], 0) + ax * dx
+  Lx[m] <- lx[m] / mx[m] # Para el último grupo abierto
+  
+  # Años vividos acumulados Tx
+  Tx <- rev(cumsum(rev(Lx)))
+  
+  # Esperanza de vida ex
+  ex <- Tx / lx
+  
+  return(data.table(x, n, mx, ax, qx, px, lx, dx, Lx, Tx, ex))
+}
+```
+
+```{r}
+tabla_de_vida_1998 <- lt_abr(x = Tabla_1998$x ,n =Tabla_1998$n, mx = Tabla_1998$mx )
+```
+
+```{r}
+
+ggplot(tabla_de_vida_1998, aes(x = x, y = mx)) + 
+  geom_line(color = "red", size = 1) +
+  geom_point(color = "red") +
+  theme_minimal() +
+  labs(
+    title = "Tasa específica de mortalidad (mx) - Tabla_de_vida",
+    x = "Edad",
+    y = "mx"
+  )
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# Usamos tabla_de_vidaa filtrando valores no válidos para logaritmo
+tabla_de_vida_1998 %>%
+  filter(mx > 0) %>% 
+  ggplot(aes(x = x, y = mx)) + 
+    geom_line(color = "blue", size = 1) + 
+    geom_point(color = "blue", alpha = 0.5) + 
+    scale_y_log10() + 
+    theme_minimal() + 
+    labs(
+      title = "Tasa específica de mortalidad (log mx) - Jalisco", 
+      subtitle = "Escala semilogarítmica para análisis de patrón Gompertz",
+      x = "Edad (x)", 
+      y = "log10(mx)"
+    )
+```
+
+```{r}
+Tabla_2018 <- read_excel(ruta_archivo, 
+                    sheet = 2) %>% 
+  rename(
+    x = 1,
+    n = 2,
+    N = 3,
+    D = 4
+  ) %>% 
+  mutate(
+    x = as.numeric(x),
+    n = as.numeric(n),
+    N = as.numeric(N),
+    D = as.numeric(D),
+    mx = D / N
+  )
+  lt_abr <- function(x, n, mx, sex = "f", IMR = NA) {
+  m <- length(x)
+  ax <- n / 2
+  
+  # Coeficientes para a0 (Edad 0)
+  if (sex == "m") { 
+    ax[1] <- ifelse(mx[1] >= 0.107, 0.330, 0.045 + 2.684 * mx[1])
+  } else {
+    ax[1] <- ifelse(mx[1] >= 0.107, 0.350, 0.053 + 2.800 * mx[1])
+  }
+  
+  # Coeficientes para 4a1 (Edad 1-4)
+  if (sex == "m") { 
+    ax[2] <- ifelse(mx[1] >= 0.107, 1.352, 1.651 - 2.816 * mx[1]) # Corregido signo -
+  } else {
+    ax[2] <- ifelse(mx[1] >= 0.107, 1.361, 1.522 - 1.518 * mx[1])
+  }
+  
+  # Probabilidad de morir qx
+  qx <- (n * mx) / (1 + (n - ax) * mx)
+  qx[m] <- 1 
+  
+  # Probabilidad de sobrevivir px
+  px <- 1 - qx 
+  
+  # Sobrevivientes lx (Radix 100,000)
+  # Usamos c(1, px[-m]) para que el primer valor sea 1 y luego multiplique
+  lx <- 100000 * cumprod(c(1, px[-m]))
+  
+  # Muertes dx (CORREGIDO: quitamos c[...] por c(...) )
+  dx <- c(-diff(lx), lx[m])
+  
+  # Años vividos Lx
+  Lx <- n * c(lx[-1], 0) + ax * dx
+  Lx[m] <- lx[m] / mx[m] # Para el último grupo abierto
+  
+  # Años vividos acumulados Tx
+  Tx <- rev(cumsum(rev(Lx)))
+  
+  # Esperanza de vida ex
+  ex <- Tx / lx
+  
+  return(data.table(x, n, mx, ax, qx, px, lx, dx, Lx, Tx, ex))
+}
+```
+
+```{r}
+tabla_de_vida_2018 <- lt_abr(x = Tabla_2018$x ,n =Tabla_2018$n, mx = Tabla_2018$mx )
+```
+
+```{r}
+tabla_comp <- bind_rows()
+```
+
+```{r}
+# 1. Limpiar entorno
+rm(list = ls())
+
+# 2. Cargar librería
+library(data.table)
+
+# 3. Configurar el directorio a tu ruta de Documentos
+setwd("C:/Users/vivim/OneDrive/Documentos/")
+
+# 4. Leer el archivo (usando la ruta y nombre exacto que confirmaste)
+il <- fread("data_mdlt.csv")
+
+# 5. Limpieza: eliminar la fila 20
+il <- il[-20, ]
+
+# --- CÁLCULOS ACTUARIALES ---
+
+# Paso 2: Probabilidad de muerte por causa específica
+il[, qx_i := qx * (Dx_i / Dx)]
+
+# Paso 3: Muertes por causa específica
+# Se usa lx (sobrevivientes totales) multiplicado por la probabilidad específica
+il[, dx_i := lx * qx_i]
+
+# Paso 4: Reconstrucción de la columna de sobrevivientes por causa (lx_i)
+# Se usa la suma acumulada inversa de las muertes para reconstruir la cohorte
+il[, lx_i := rev(cumsum(rev(dx_i)))]
+
+il[, px_i := lx_i/lx]
+
+
+
+# 6. Visualizar resultados finales
+View(il)
+```

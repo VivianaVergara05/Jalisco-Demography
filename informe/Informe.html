@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>informe</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Informe_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Informe_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Informe_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Informe_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="Informe_files/libs/quarto-html/popper.min.js"></script>
+<script src="Informe_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Informe_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Informe_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Informe_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Informe_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Informe_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Informe_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<pre class="qmd"><code>---
+title: "Jalisco"
+author: 
+  - "Viviana Vergara Galindo"
+  - "Claudia Areli Avila Melgarejo"
+date: "2026-05-15"
+format: 
+  pdf:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    colorlinks: true
+    keep-tex: false
+editor: visual
+---</code></pre>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="a-introducción" class="level1">
+<h1>a) Introducción</h1>
+<p>El estado de Jalisco, ubicado en la región occidente de México, es una de las entidades con mayor población del país. De acuerdo con el Censo de Población y Vivienda 2020, cuenta con alrededor de 8.3 millones de habitantes, cifra que ha seguido aumentando en los últimos años. Su población se concentra principalmente en zonas urbanas, especialmente en la Zona Metropolitana de Guadalajara, donde vive más de la mitad de los jaliscienses.</p>
+<p><strong>Factores que afectan la mortalidad en Jalisco:</strong></p>
+<ul>
+<li><strong>Enfermedades crónicas:</strong> Alta prevalencia de diabetes, enfermedades cardíacas y obesidad</li>
+<li><strong>Violencia:</strong> Tasas elevadas de homicidios, afectando principalmente a hombres jóvenes</li>
+<li><strong>Envejecimiento poblacional:</strong> Aumento de la población de 60 años y más</li>
+<li><strong>COVID-19:</strong> Impacto significativo en 2021, especialmente en adultos mayores</li>
+</ul>
+</section>
+<section id="b-diagrama-de-flujo" class="level1">
+<h1>b) Diagrama de Flujo</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="content.png" class="img-fluid figure-img"></p>
+<figcaption>Diagrama de flujo del proceso de construcción de tablas de vida</figcaption>
+</figure>
+</div>
+<p><em>Fuente: Elaboración propia.</em></p>
+</section>
+<section id="c-fórmulas-utilizadas" class="level1">
+<h1>c) Fórmulas utilizadas</h1>
+<section id="tasa-específica-de-mortalidad" class="level2">
+<h2 class="anchored" data-anchor-id="tasa-específica-de-mortalidad">Tasa específica de mortalidad</h2>
+<p><span class="math display">\[
+m_x = \frac{D_x}{N_x}
+\]</span></p>
+</section>
+<section id="probabilidad-de-morir-entre-las-edades-x-y-xn" class="level2">
+<h2 class="anchored" data-anchor-id="probabilidad-de-morir-entre-las-edades-x-y-xn">Probabilidad de morir entre las edades <span class="math inline">\(x\)</span> y <span class="math inline">\(x+n\)</span></h2>
+<p><span class="math display">\[
+q_x = \frac{n \cdot m_x}{1 + (n - a_x) \cdot m_x}
+\]</span></p>
+</section>
+<section id="coeficientes-a_x-método-de-coale-demeny" class="level2">
+<h2 class="anchored" data-anchor-id="coeficientes-a_x-método-de-coale-demeny">Coeficientes <span class="math inline">\(a_x\)</span> (método de Coale-Demeny)</h2>
+<p>Para la edad 0 (primer año de vida):</p>
+<p><span class="math display">\[
+a_0 = \begin{cases}
+0.330 &amp; \text{si } m_0 \ge 0.107 \text{ (hombres)} \\
+0.350 &amp; \text{si } m_0 \ge 0.107 \text{ (mujeres)} \\
+0.045 + 2.684 \cdot m_0 &amp; \text{si } m_0 &lt; 0.107 \text{ (hombres)} \\
+0.053 + 2.800 \cdot m_0 &amp; \text{si } m_0 &lt; 0.107 \text{ (mujeres)}
+\end{cases}
+\]</span></p>
+<p>Para el grupo de 1 a 4 años:</p>
+<p><span class="math display">\[
+a_1 = \begin{cases}
+1.352 &amp; \text{si } m_0 \ge 0.107 \text{ (hombres)} \\
+1.361 &amp; \text{si } m_0 \ge 0.107 \text{ (mujeres)} \\
+1.651 - 2.816 \cdot m_0 &amp; \text{si } m_0 &lt; 0.107 \text{ (hombres)} \\
+1.522 - 1.518 \cdot m_0 &amp; \text{si } m_0 &lt; 0.107 \text{ (mujeres)}
+\end{cases}
+\]</span></p>
+<p>Para el resto de grupos de edad (excepto el último): <span class="math inline">\(a_x = n/2\)</span></p>
+</section>
+<section id="sobrevivientes" class="level2">
+<h2 class="anchored" data-anchor-id="sobrevivientes">Sobrevivientes</h2>
+<p><span class="math display">\[
+l_{x+n} = l_x \cdot (1 - q_x), \quad l_0 = 100,000
+\]</span></p>
+</section>
+<section id="años-persona-vividos" class="level2">
+<h2 class="anchored" data-anchor-id="años-persona-vividos">Años persona vividos</h2>
+<p>Para grupos cerrados (<span class="math inline">\(n\)</span> finito):</p>
+<p><span class="math display">\[
+L_x = n \cdot l_{x+n} + a_x \cdot d_x
+\]</span></p>
+<p>Para el último grupo abierto:</p>
+<p><span class="math display">\[
+L_{\omega} = \frac{l_{\omega}}{m_{\omega}}
+\]</span></p>
+</section>
+<section id="esperanza-de-vida" class="level2">
+<h2 class="anchored" data-anchor-id="esperanza-de-vida">Esperanza de vida</h2>
+<p><span class="math display">\[
+e_x = \frac{T_x}{l_x}, \quad T_x = \sum_{i=x}^{\omega} L_i
+\]</span></p>
+</section>
+<section id="crecimiento-exponencial-para-estimación-de-población-intercensal" class="level2">
+<h2 class="anchored" data-anchor-id="crecimiento-exponencial-para-estimación-de-población-intercensal">Crecimiento exponencial (para estimación de población intercensal)</h2>
+<p><span class="math display">\[
+P(t) = P_0 \cdot e^{rt}, \quad r = \frac{\ln(P_t/P_0)}{t - t_0}
+\]</span></p>
+</section>
+</section>
+<section id="d-código-utilizado" class="level1">
+<h1>d) Código utilizado</h1>
+<p>El código completo del análisis está disponible en el repositorio de GitHub:</p>
+<p>🔗 <a href="https://github.com/VivianaVergara05/Jalisco-Demography" class="uri">https://github.com/VivianaVergara05/Jalisco-Demography</a></p>
+<p><strong>Funciones principales:</strong></p>
+<ul>
+<li><code>lt_abr()</code>: Construcción de tablas de vida abreviadas (método Coale-Demeny)</li>
+<li><code>crecimiento_exp()</code>: Estimación de población intercensal</li>
+<li>Procesamiento de datos de INEGI y CONAPO</li>
+</ul>
+<section id="tablas-de-vida-completas" class="level2">
+<h2 class="anchored" data-anchor-id="tablas-de-vida-completas">Tablas de vida completas</h2>
+<p>A continuación se presentan las tablas de vida abreviadas para cada año y sexo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tablas-vida-completas</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: asis</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar tablas de vida</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>tablas_vida <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">vivim</span><span class="sc">\\</span><span class="st">OneDrive</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">Demografia Jalisco</span><span class="sc">\\</span><span class="st">Demography</span><span class="sc">\\</span><span class="st">Jalisco-Demography</span><span class="sc">\\</span><span class="st">output</span><span class="sc">\\</span><span class="st">tablas</span><span class="sc">\\</span><span class="st">tablas_vida_completas.rds"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para mostrar una tabla de vida</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>mostrar_tabla <span class="ot">&lt;-</span> <span class="cf">function</span>(lt, titulo) {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Seleccionar columnas relevantes</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  tabla <span class="ot">&lt;-</span> lt[, <span class="fu">c</span>(<span class="st">"edad"</span>, <span class="st">"x"</span>, <span class="st">"n"</span>, <span class="st">"mx"</span>, <span class="st">"qx"</span>, <span class="st">"lx"</span>, <span class="st">"dx"</span>, <span class="st">"ex"</span>)]</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crear caption con el título</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n\n</span><span class="st">### "</span>, titulo, <span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Imprimir tabla</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(tabla, </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> titulo,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Edad"</span>, <span class="st">"x"</span>, <span class="st">"n"</span>, <span class="st">"mx"</span>, <span class="st">"qx"</span>, <span class="st">"lx"</span>, <span class="st">"dx"</span>, <span class="st">"e₀"</span>),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">align =</span> <span class="st">"lccccccc"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hold_position"</span>, <span class="st">"scale_down"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>()</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar cada tabla</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="fu">mostrar_tabla</span>(tablas_vida<span class="sc">$</span>lt_2010_h, <span class="st">"Tabla de vida - Jalisco 2010, Hombres"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+###  Tabla de vida - Jalisco 2010, Hombres 
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Tabla de vida - Jalisco 2010, Hombres&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Edad &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; x &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; mx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; qx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; dx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; e₀ &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.066486 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.063222 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6322 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 66.99 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1 a 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.013297 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.051454 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 93678 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4820 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 70.49 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5 a 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000166 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000831 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88858 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 70.24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 a 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000202 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001008 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88784 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 90 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 65.29 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 15 a 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000449 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002243 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88694 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 199 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 60.36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 20 a 24 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000657 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003279 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88496 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 290 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 55.49 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 25 a 29 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000832 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.004154 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88205 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 366 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 50.66 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 30 a 34 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001051 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.005240 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 87839 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 460 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 45.86 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 35 a 39 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001338 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.006670 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 87379 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 583 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 41.09 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 40 a 44 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002286 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.011366 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 86796 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 987 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 36.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 45 a 49 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003386 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.016788 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85809 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1441 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 50 a 54 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.005868 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.028918 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 84369 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2440 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 27.24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 55 a 59 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.009522 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.046504 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 81929 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3810 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22.97 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 60 a 64 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.016011 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.076975 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 78119 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6013 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18.97 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 65 a 69 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.025664 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.120584 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 72106 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8695 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 70 a 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.036655 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.167889 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63411 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10646 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12.11 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 75 a 79 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 17 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.061011 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.264684 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 52765 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13966 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 80 a 84 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.104933 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.415633 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 38799 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16126 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6.40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 85+ &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.239356 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.000000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22673 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22673 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4.18 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mostrar_tabla</span>(tablas_vida<span class="sc">$</span>lt_2010_m, <span class="st">"Tabla de vida - Jalisco 2010, Mujeres"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+###  Tabla de vida - Jalisco 2010, Mujeres 
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Tabla de vida - Jalisco 2010, Mujeres&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Edad &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; x &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; mx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; qx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; dx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; e₀ &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.089369 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.084131 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8413 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 61.52 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1 a 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.017874 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.068305 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 91587 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6256 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 66.15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5 a 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000223 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001116 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85331 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 95 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 66.89 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 a 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000302 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001507 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85236 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 128 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 61.97 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 15 a 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001327 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.006612 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85107 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 563 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 57.06 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 20 a 24 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002440 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.012125 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 84545 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1025 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 52.42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 25 a 29 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003227 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.016005 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 83520 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1337 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 48.03 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 30 a 34 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003562 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.017651 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 82183 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1451 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 43.77 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 35 a 39 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003619 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.017934 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 80732 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1448 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 39.51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 40 a 44 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.005007 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.024726 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 79284 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1960 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 35.19 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 45 a 49 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.007320 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.035943 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 77324 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2779 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 50 a 54 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.008737 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.042749 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 74545 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3187 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 27.08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 55 a 59 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.013626 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.065884 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 71358 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4701 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 23.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 60 a 64 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.018992 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.090654 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 66657 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6043 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 19.64 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 65 a 69 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.027645 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.129288 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 60614 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7837 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 70 a 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.040911 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.185574 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 52777 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9794 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13.40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 75 a 79 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 17 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.062878 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.271681 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 42983 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11678 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10.89 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 80 a 84 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.083321 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.344785 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31306 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10794 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9.01 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 85+ &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.134372 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.000000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 20512 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 20512 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7.44 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mostrar_tabla</span>(tablas_vida<span class="sc">$</span>lt_2019_h, <span class="st">"Tabla de vida - Jalisco 2019, Hombres"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+###  Tabla de vida - Jalisco 2019, Hombres 
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Tabla de vida - Jalisco 2019, Hombres&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Edad &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; x &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; mx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; qx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; dx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; e₀ &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.066431 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.063172 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6317 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 70.15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1 a 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.013286 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.051413 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 93683 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4816 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 73.86 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5 a 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000166 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000830 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88866 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 73.79 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 a 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000195 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000973 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88793 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 86 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 68.85 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 15 a 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000438 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002186 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88706 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 194 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63.91 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 20 a 24 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000621 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003098 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88512 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 274 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 59.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 25 a 29 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000735 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003666 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88238 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 323 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 54.22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 30 a 34 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000912 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.004548 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 87915 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 400 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 49.41 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 35 a 39 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001189 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.005928 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 87515 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 519 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 44.63 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 40 a 44 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001809 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.009006 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 86996 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 783 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 39.88 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 45 a 49 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002369 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.011777 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 86212 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1015 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 35.22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 50 a 54 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.004075 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.020171 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85197 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1719 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 30.61 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 55 a 59 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.006486 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.031913 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 83479 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2664 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 26.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 60 a 64 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.010747 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.052329 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 80815 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4229 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 21.97 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 65 a 69 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.016990 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.081487 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 76586 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6241 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18.04 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 70 a 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.024981 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.117563 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 70345 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8270 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14.42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 75 a 79 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 17 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.041032 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.186072 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 62075 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11550 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11.01 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 80 a 84 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.072467 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.306762 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 50525 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15499 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7.95 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 85+ &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.186402 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.000000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 35026 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 35026 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5.36 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mostrar_tabla</span>(tablas_vida<span class="sc">$</span>lt_2019_m, <span class="st">"Tabla de vida - Jalisco 2019, Mujeres"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+###  Tabla de vida - Jalisco 2019, Mujeres 
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Tabla de vida - Jalisco 2019, Mujeres&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Edad &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; x &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; mx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; qx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; dx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; e₀ &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.088820 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.083633 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8363 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 65.72 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1 a 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.017764 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.067904 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 91637 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6223 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 70.69 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5 a 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000222 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001110 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85414 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 95 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 71.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 a 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000292 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001457 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85319 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 124 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 66.81 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 15 a 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001301 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.006485 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85195 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 552 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 61.91 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 20 a 24 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002335 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.011610 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 84643 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 983 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 57.29 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 25 a 29 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002851 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.014156 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 83660 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1184 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 52.94 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 30 a 34 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003095 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.015358 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 82476 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1267 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 48.66 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 35 a 39 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003187 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.015807 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 81209 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1284 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 44.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 40 a 44 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003951 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.019560 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 79925 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1563 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 40.06 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 45 a 49 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.005269 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.026000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 78362 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2037 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 35.80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 50 a 54 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.006165 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.030356 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 76325 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2317 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31.69 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 55 a 59 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.009262 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.045264 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 74008 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3350 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 27.61 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 60 a 64 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.012572 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.060943 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 70658 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4306 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 23.80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 65 a 69 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.017763 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.085037 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 66352 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5642 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 20.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 70 a 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.027787 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.129911 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 60709 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7887 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16.82 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 75 a 79 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 17 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.042952 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.193934 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 52823 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10244 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13.96 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 80 a 84 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.058654 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.255765 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 42578 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10890 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11.72 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 85+ &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.101130 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.000000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31688 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31688 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9.89 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mostrar_tabla</span>(tablas_vida<span class="sc">$</span>lt_2021_h, <span class="st">"Tabla de vida - Jalisco 2021, Hombres"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+###  Tabla de vida - Jalisco 2021, Hombres 
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Tabla de vida - Jalisco 2021, Hombres&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Edad &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; x &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; mx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; qx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; dx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; e₀ &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.066426 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.063167 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6317 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 70.85 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1 a 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.013285 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.051408 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 93683 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4816 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 74.61 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5 a 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000166 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000830 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88867 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 74.57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 a 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000193 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000965 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88793 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 86 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 69.63 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 15 a 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000435 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002174 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88708 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 193 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 64.70 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 20 a 24 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000613 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003059 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88515 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 271 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 59.83 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 25 a 29 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000714 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003566 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 88244 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 315 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 55.01 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 30 a 34 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000884 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.004408 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 87929 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 388 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 50.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 35 a 39 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001158 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.005775 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 87542 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 506 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 45.41 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 40 a 44 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001718 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.008552 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 87036 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 744 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 40.66 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 45 a 49 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002189 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.010885 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 86292 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 939 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 35.99 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 50 a 54 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003758 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.018617 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85353 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1589 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 55 a 59 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.005956 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.029344 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 83764 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2458 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 26.90 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 60 a 64 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.009837 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.048004 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 81306 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3903 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 22.64 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 65 a 69 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.015503 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.074623 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 77403 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5776 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18.65 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 70 a 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.022943 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.108491 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 71627 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7771 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14.96 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 75 a 79 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 17 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.037573 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.171734 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63856 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10966 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11.47 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 80 a 84 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.066751 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.286024 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 52890 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15128 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8.33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 85+ &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.176344 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.000000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 37762 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 37762 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5.67 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mostrar_tabla</span>(tablas_vida<span class="sc">$</span>lt_2021_m, <span class="st">"Tabla de vida - Jalisco 2021, Mujeres"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+###  Tabla de vida - Jalisco 2021, Mujeres 
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Tabla de vida - Jalisco 2021, Mujeres&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Edad &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; x &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; mx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; qx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; dx &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; e₀ &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.088707 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.083530 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 100000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8353 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 66.70 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1 a 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.017741 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.067822 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 91647 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6216 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 71.75 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5 a 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000222 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001108 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85431 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 95 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 72.87 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 a 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.000289 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001446 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85337 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 123 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 67.95 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 15 a 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.001296 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.006457 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 85213 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 550 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 20 a 24 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002313 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.011499 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 84663 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 974 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 58.44 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 25 a 29 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.002774 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.013776 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 83689 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1153 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 54.09 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 30 a 34 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003001 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.014891 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 82536 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1229 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 49.81 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 35 a 39 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003098 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.015371 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 81307 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1250 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 45.53 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 40 a 44 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.003748 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.018568 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 80058 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1486 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 41.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 45 a 49 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.004898 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.024193 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 78571 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1901 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 36.93 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 50 a 54 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.005706 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.028127 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 76670 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2157 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 32.78 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 55 a 59 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.008502 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.041624 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 74514 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3102 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 28.66 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 60 a 64 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.011472 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.055758 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 71412 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3982 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 24.80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 65 a 69 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.016101 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.077390 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 67430 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5218 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 21.11 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 70 a 74 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.025501 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.119863 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 62212 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7457 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 17.67 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 75 a 79 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 17 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.039468 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.179616 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 54755 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9835 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 80 a 84 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.054257 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.238883 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 44920 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10731 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 12.42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 85+ &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.094949 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.000000 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 34189 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 34189 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10.53 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="e-esperanzas-de-vida-al-nacer" class="level1">
+<h1>e) Esperanzas de vida al nacer</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tabla-e0 #| echo: false #| message: false</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>tabla_e0 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( Año <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2010</span>, <span class="dv">2019</span>, <span class="dv">2019</span>, <span class="dv">2021</span>, <span class="dv">2021</span>), <span class="at">Sexo =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Hombres"</span>, <span class="st">"Mujeres"</span>), <span class="dv">3</span>), <span class="at">e0 =</span> <span class="fu">c</span>(<span class="fl">73.45</span>, <span class="fl">78.68</span>, <span class="fl">73.03</span>, <span class="fl">79.28</span>, <span class="fl">67.81</span>, <span class="fl">75.16</span>) )</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabla_e0, <span class="at">caption =</span> <span class="st">"Esperanza de vida al nacer por sexo y año"</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Año"</span>, <span class="st">"Sexo"</span>, <span class="st">"Esperanza de vida (años)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Esperanza de vida al nacer por sexo y año</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Año</th>
+<th style="text-align: left;">Sexo</th>
+<th style="text-align: right;">Esperanza de vida (años)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">Hombres</td>
+<td style="text-align: right;">73.45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2010</td>
+<td style="text-align: left;">Mujeres</td>
+<td style="text-align: right;">78.68</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">Hombres</td>
+<td style="text-align: right;">73.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">Mujeres</td>
+<td style="text-align: right;">79.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2021</td>
+<td style="text-align: left;">Hombres</td>
+<td style="text-align: right;">67.81</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2021</td>
+<td style="text-align: left;">Mujeres</td>
+<td style="text-align: right;">75.16</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="f-gráficas" class="level1">
+<h1>f) Gráficas</h1>
+<section id="evolución-de-la-esperanza-de-vida" class="level2">
+<h2 class="anchored" data-anchor-id="evolución-de-la-esperanza-de-vida">Evolución de la esperanza de vida</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-evolucion</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "Evolución de la esperanza de vida al nacer en Jalisco (2010-2021)"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tabla_e0, <span class="fu">aes</span>(<span class="at">x =</span> Año, <span class="at">y =</span> e0, <span class="at">color =</span> Sexo, <span class="at">group =</span> Sexo)) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Año"</span>, <span class="at">y =</span> <span class="st">"Esperanza de vida (años)"</span>, <span class="at">color =</span> <span class="st">"Sexo"</span>) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Hombres"</span> <span class="ot">=</span> <span class="st">"#2E86AB"</span>, <span class="st">"Mujeres"</span> <span class="ot">=</span> <span class="st">"#A23B72"</span>)) <span class="sc">+</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2019</span>, <span class="dv">2021</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Informe_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="curvas-de-supervivencia-lx" class="level2">
+<h2 class="anchored" data-anchor-id="curvas-de-supervivencia-lx">Curvas de supervivencia (lx)</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-lx</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "Curvas de supervivencia comparativas (2019 vs 2021)"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar tablas de vida completas</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>tablas_vida <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">vivim</span><span class="sc">\\</span><span class="st">OneDrive</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">Demografia Jalisco</span><span class="sc">\\</span><span class="st">Demography</span><span class="sc">\\</span><span class="st">Jalisco-Demography</span><span class="sc">\\</span><span class="st">output</span><span class="sc">\\</span><span class="st">tablas</span><span class="sc">\\</span><span class="st">tablas_vida_completas.rds"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer lx para 2019 y 2021</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>lx_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (key <span class="cf">in</span> <span class="fu">names</span>(tablas_vida)) {</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  lt <span class="ot">&lt;-</span> tablas_vida[[key]]</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crear un índice numérico para el eje x</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  lt<span class="sc">$</span>idx <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(lt)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  lx_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(lx_data,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">data.frame</span>(</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">idx =</span> lt<span class="sc">$</span>idx,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>                     <span class="at">edad =</span> lt<span class="sc">$</span>edad,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                     <span class="at">lx =</span> lt<span class="sc">$</span>lx,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                     Año <span class="ot">=</span> lt<span class="sc">$</span>año,</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Sexo =</span> lt<span class="sc">$</span>sexo</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                   ))</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar solo 2019 y 2021</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>lx_compare <span class="ot">&lt;-</span> lx_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Año <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2019</span>, <span class="dv">2021</span>))</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica corregida</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lx_compare, <span class="fu">aes</span>(<span class="at">x =</span> idx, <span class="at">y =</span> lx, <span class="at">color =</span> <span class="fu">factor</span>(Año), <span class="at">linetype =</span> Sexo)) <span class="sc">+</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Grupo de edad"</span>, <span class="at">y =</span> <span class="st">"Sobrevivientes (lx)"</span>, <span class="at">color =</span> <span class="st">"Año"</span>, <span class="at">linetype =</span> <span class="st">"Sexo"</span>) <span class="sc">+</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"2019"</span> <span class="ot">=</span> <span class="st">"#1B998B"</span>, <span class="st">"2021"</span> <span class="ot">=</span> <span class="st">"#E84855"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Informe_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tasas-específicas-de-mortalidad-mx" class="level2">
+<h2 class="anchored" data-anchor-id="tasas-específicas-de-mortalidad-mx">Tasas específicas de mortalidad (mx)</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-mx</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "Tasas específicas de mortalidad por edad (escala logarítmica)"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar tablas de vida completas</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>tablas_vida <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">vivim</span><span class="sc">\\</span><span class="st">OneDrive</span><span class="sc">\\</span><span class="st">Desktop</span><span class="sc">\\</span><span class="st">Demografia Jalisco</span><span class="sc">\\</span><span class="st">Demography</span><span class="sc">\\</span><span class="st">Jalisco-Demography</span><span class="sc">\\</span><span class="st">output</span><span class="sc">\\</span><span class="st">tablas</span><span class="sc">\\</span><span class="st">tablas_vida_completas.rds"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer mx</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>mx_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (key <span class="cf">in</span> <span class="fu">names</span>(tablas_vida)) {</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  lt <span class="ot">&lt;-</span> tablas_vida[[key]]</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crear índice numérico</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  lt<span class="sc">$</span>idx <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(lt)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  mx_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(mx_data,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">data.frame</span>(</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">idx =</span> lt<span class="sc">$</span>idx,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mx =</span> lt<span class="sc">$</span>mx,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>                     Año <span class="ot">=</span> lt<span class="sc">$</span>año,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Sexo =</span> lt<span class="sc">$</span>sexo</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>                   ))</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar valores NA o cero para escala log</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>mx_plot <span class="ot">&lt;-</span> mx_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(mx), mx <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica corregida</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mx_plot, <span class="fu">aes</span>(<span class="at">x =</span> idx, <span class="at">y =</span> mx, <span class="at">color =</span> <span class="fu">factor</span>(Año))) <span class="sc">+</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Sexo, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Grupo de edad"</span>, <span class="at">y =</span> <span class="st">"log10(mx)"</span>, <span class="at">color =</span> <span class="st">"Año"</span>) <span class="sc">+</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Informe_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="g-análisis-de-resultados" class="level1">
+<h1>g) Análisis de resultados</h1>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
