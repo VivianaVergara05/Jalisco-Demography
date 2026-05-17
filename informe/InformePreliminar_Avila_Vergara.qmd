@@ -1,5 +1,5 @@
 ---
-title: "Jalisco: Construcción de Tablas de Vida 2010, 2019 y 2021"
+title: "Jalisco"
 author: 
   - "Viviana Vergara Galindo"
   - "Claudia Areli Avila Melgarejo"
