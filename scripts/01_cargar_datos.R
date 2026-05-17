@@ -1,6 +1,7 @@
 # scripts/01_cargar_datos.R
 
 library(readxl)
+library(dplyr) 
 
 rm(list = ls())
 cat(" Entorno limpiado\n")

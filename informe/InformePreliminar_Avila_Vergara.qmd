@@ -19,6 +19,10 @@ editor: visual
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: setup
+#| include: false
+
+# 1. Cargar librerías necesarias para todo el documento
 library(readxl)
 library(data.table)
 library(ggplot2)
@@ -26,16 +30,38 @@ library(dplyr)
 library(tidyr)
 library(kableExtra)
 library(lubridate)
+library(knitr)
 
+# 2. Definir rutas base locales (Modifica la ruta si cambias de computadora)
 proyecto_dir <- "C:/Users/vivim/OneDrive/Desktop/Demografia Jalisco/Demography/Jalisco-Demography"
-
-# Definir rutas base
 ruta_base <- file.path(proyecto_dir, "data/raw/")
 ruta_output <- file.path(proyecto_dir, "output/")
 
-# Cargar tablas de vida
-tablas_vida <- readRDS(file.path(ruta_output, "tablas/tablas_vida_completas.rds"))
+# 3. Búsqueda robusta y carga de las tablas de vida completas para evitar fallas relativas en Quarto
+posibles_rutas_rds <- c(
+  file.path(ruta_output, "tablas/tablas_vida_completas.rds"),
+  "output/tablas/tablas_vida_completas.rds",
+  "../output/tablas/tablas_vida_completas.rds",
+  "tablas_vida_completas.rds"
+)
 
+tablas_vida_cargada <- FALSE
+for (ruta in posibles_rutas_rds) {
+  if (file.exists(ruta)) {
+    tablas_vida <- readRDS(ruta)
+    tablas_vida_cargada <- TRUE
+    break
+  }
+}
+
+if (!tablas_vida_cargada) {
+  # Intento desesperado con ruta absoluta si los caminos relativos fallan al renderizar
+  ruta_fija <- "C:/Users/vivim/OneDrive/Desktop/Demografia Jalisco/Demography/Jalisco-Demography/output/tablas/tablas_vida_completas.rds"
+  if (file.exists(ruta_fija)) {
+    tablas_vida <- readRDS(ruta_fija)
+    tablas_vida_cargada <- TRUE
+  }
+}
 ```
 
 # a) Introducción
@@ -408,47 +434,18 @@ tabla_e0 <- data.frame(
   e0 = c(73.54, 69.72, 77.00, 74.32, 77.76, 75.39)
 )
 
-kable(tabla_e0, 
-      booktabs = TRUE,
-      caption = "Esperanza de vida al nacer por sexo y año",
-      col.names = c("Año", "Sexo", "Esperanza de vida (años)"),
-      digits = 2)
+knitr::kable(tabla_e0, 
+             booktabs = TRUE,
+             caption = "Esperanza de vida al nacer por sexo y año en Jalisco",
+             col.names = c("Año", "Sexo", "Esperanza de vida (años)"),
+             digits = 2) %>%
+  kableExtra::kable_styling(latex_options = "HOLD_position", position = "center")
 
 ```
 
-## Años Potenciales de Vida Perdidos (APV)
+## Descomposición de las diferencias en la esperanza de vida al nacer
 
-El análisis de descomposición permite aislar los efectos netos que los cambios en las intensidades de mortalidad tienen sobre la esperanza de vida al nacer ($e_0$) en periodos de tiempo definidos. A partir de los resultados integrados en el procesamiento de las tablas de vida de Jalisco, se presenta la contribución agregada para los horizontes analizados:
-
-```{r}
-#| label: fig-apv-barras
-#| fig.cap: "Años Potenciales de Vida Perdidos (APV) totales en Jalisco"
-#| fig.pos: "H"
-#| echo: false
-#| warning: false
-#| message: false
-
-library(ggplot2)
-
-# Estructura lógica idéntica a tu script 05_apv.R para generar la gráfica 4
-if (exists("apv_total_df") || file.exists("output/tablas/apv_total.csv")) {
-  
-  apv_plot_data <- if(exists("apv_total_df")) apv_total_df else read.csv("output/tablas/apv_total.csv")
-  
-  ggplot(apv_plot_data, aes(x = as.factor(año), y = apv_total_millones, fill = sexo)) +
-    geom_bar(stat = "identity", position = "dodge") +
-    labs(
-      title = "Años Potenciales de Vida Perdidos (APV) totales",
-      subtitle = "Jalisco 2010-2021",
-      x = "Año",
-      y = "APV total (millones de años)",
-      fill = "Sexo"
-    ) +
-    theme_minimal() +
-    theme(legend.position = "bottom") +
-    scale_fill_manual(values = c("Hombres" = "#2E86AB", "Mujeres" = "#A23B72"))
-}
-```
+El análisis de descomposición permite aislar los efectos netos que los cambios en las intensidades de mortalidad tienen sobre la esperanza de vida al nacer (\$e_0\$) en periodos de tiempo definidos. A partir de los resultados obtenidos en el procesamiento, se presenta la contribución agregada para los horizontes analizados:
 
 ```{r}
 #| echo: false
@@ -469,6 +466,64 @@ knitr::kable(tabla_desc,
              col.names = c("Sexo", "Periodo", "Contribución neta (años)"),
              digits = 4) %>%
   kable_styling(latex_options = c("striped", "HOLD_position"), position = "center")
+
+```
+
+Al evaluar las contribuciones, observamos que durante el periodo **2010-2019**, Jalisco experimentó un avance demográfico favorable, sumando \$3.46\$ años a la expectativa de vida masculina y \$4.60\$ años a la femenina.
+
+Para el periodo **2019-2021**, la descomposición sigue arrojando saldos positivos (+\$0.76\$ y +\$1.07\$ años, respectivamente). Actuarialmente, esta tendencia continua expone la limitación del factor de corrección constante aplicado en nuestro script de cálculo, el cual suavizó por completo el impacto epidemiológico del exceso de mortalidad por COVID-19 o causas externas en las cohortes adultas del año 2021, homogeneizando el comportamiento histórico de la entidad.
+
+## Años Potenciales de Vida Perdidos (APV) totales
+
+A continuación, se presenta de forma gráfica la acumulación global de los Años Potenciales de Vida Perdidos (APV) para la entidad de Jalisco, segmentada por sexo y año de análisis (2010, 2019 y 2021):
+
+```{r}
+#| label: fig-apv-barras
+#| fig.cap: "Años Potenciales de Vida Perdidos (APV) totales en Jalisco"
+#| fig.pos: "H"
+#| echo: false
+#| warning: false
+#| message: false
+
+library(ggplot2)
+library(dplyr)
+
+# Sistema de búsqueda dinámica para el CSV de APV (Resuelve problemas de subcarpetas en Quarto)
+rutas_csv <- c(
+  file.path(ruta_output, "tablas/apv_total.csv"),
+  "output/tablas/apv_total.csv",
+  "../output/tablas/apv_total.csv",
+  "tablas/apv_total.csv",
+  "apv_total.csv"
+)
+
+archivo_encontrado <- ""
+for (r in rutas_csv) {
+  if (file.exists(r)) {
+    archivo_encontrado <- r
+    break
+  }
+}
+
+if (archivo_encontrado != "") {
+  apv_total <- read.csv(archivo_encontrado)
+  
+  ggplot(apv_total, aes(x = as.factor(año), y = apv_total_millones, fill = sexo)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    labs(
+      title = "Años Potenciales de Vida Perdidos (APV) totales",
+      subtitle = "Jalisco 2010-2021",
+      x = "Año",
+      y = "APV total (millones de años)",
+      fill = "Sexo"
+    ) +
+    theme_minimal() +
+    theme(legend.position = "bottom") +
+    scale_fill_manual(values = c("Hombres" = "#2E86AB", "Mujeres" = "#A23B72"))
+} else {
+  # Mensaje informativo seguro de respaldo
+  cat("\n\n[Aviso de datos: El archivo apv_total.csv no se localizó en las rutas de Quarto. Corre primero tu script 05_apv.R en RStudio.]\n\n")
+}
 
 ```
 
