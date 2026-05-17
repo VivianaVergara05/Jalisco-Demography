@@ -1,11 +1,8 @@
 # scripts/funciones.R
-# ====================================================
-# FUNCIONES PARA TABLAS DE VIDA
-# ====================================================
 
-# ----------------------------------------------------
-# TABLA DE VIDA ABREVIADA (Método de Coale-Demeny)
-# ----------------------------------------------------
+# FUNCIONES PARA TABLAS DE VIDA
+
+# TABLA DE VIDA ABREVIADA 
 
 lt_abr <- function(x, n, mx, sex = "f") {
   
@@ -84,9 +81,8 @@ lt_abr <- function(x, n, mx, sex = "f") {
   return(resultado)
 }
 
-# ----------------------------------------------------
 # CRECIMIENTO EXPONENCIAL
-# ----------------------------------------------------
+
 
 crecimiento_exp <- function(P0, Pt, t0, tt, t_deseada) {
   r <- log(Pt / P0) / (tt - t0)
@@ -94,4 +90,4 @@ crecimiento_exp <- function(P0, Pt, t0, tt, t_deseada) {
   return(P_deseada)
 }
 
-cat("✅ Funciones cargadas correctamente\n")
+cat("Funciones cargadas correctamente\n")

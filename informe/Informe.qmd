@@ -141,17 +141,19 @@ tablas_vida <- readRDS("C:\\Users\\vivim\\OneDrive\\Desktop\\Demografia Jalisco\
 ### 2010 - Hombres
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-kable(tablas_vida$lt_2010_h[, c("edad", "x", "n", "mx", "qx", "lx", "dx", "ex")], 
-      format = "latex", 
-      booktabs = TRUE, 
-      longtable = TRUE,      # IMPORTANTE: Permite que la tabla use varias páginas
-      escape = FALSE, 
+
+tabla_limpia <- as.data.frame(tablas_vida$lt_2010_h)[, c("edad", "x", "n", "mx", "qx", "lx", "dx", "ex")]
+
+
+kable(tabla_limpia,
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE,
+      escape = FALSE,
       digits = c(0, 0, 0, 6, 6, 0, 0, 2),
       caption = "Tabla de vida - Jalisco 2010, Hombres",
       col.names = c("Edad", "x", "n", "$m_x$", "$q_x$", "$l_x$", "$d_x$", "$e_x$")) %>%
-  kable_styling(latex_options = c("striped", "repeat_header"), # Repite el título en cada hoja
-                font_size = 9) # Un poco más pequeña para que quepa bien
-
+  kable_styling(latex_options = c("striped", "repeat_header"), font_size = 9)
 ```
 
 ### 2010 - Mujeres
@@ -312,9 +314,14 @@ ggplot(lx_compare, aes(x = idx, y = lx, color = factor(Año), linetype = Sexo)) 
 ```{r}
 #| label: fig-mx
 #| fig.cap: "Tasas específicas de mortalidad por edad (escala logarítmica)"
+#| fig-width: 10
+#| fig-height: 6
 #| echo: false
 #| warning: false
 #| message: false
+
+library(dplyr)
+library(ggplot2)
 
 # Cargar tablas de vida completas
 tablas_vida <- readRDS("C:\\Users\\vivim\\OneDrive\\Desktop\\Demografia Jalisco\\Demography\\Jalisco-Demography\\output\\tablas\\tablas_vida_completas.rds")
@@ -324,29 +331,124 @@ mx_data <- data.frame()
 
 for (key in names(tablas_vida)) {
   lt <- tablas_vida[[key]]
-  # Crear índice numérico
   lt$idx <- 1:nrow(lt)
   
   mx_data <- rbind(mx_data,
                    data.frame(
                      idx = lt$idx,
+                     edad = lt$edad, 
                      mx = lt$mx,
                      Año = lt$año,
                      Sexo = lt$sexo
                    ))
 }
 
-# Eliminar valores NA o cero para escala log
+# Eliminar valores NA o cero
 mx_plot <- mx_data %>% filter(!is.na(mx), mx > 0)
 
-# Gráfica corregida
+# Simplificar etiquetas para mejorar la estética del eje X
+mx_plot <- mx_plot %>%
+  mutate(edad_corta = case_when(
+    edad == "0" ~ "0",
+    edad == "1 a 4" ~ "1-4",
+    TRUE ~ gsub(" a .*", "", edad) # Deja solo el límite inferior (ej. "5", "10")
+  ))
+
+# Extraer etiquetas únicas ordenadas
+etiquetas_edad <- mx_plot %>% 
+  distinct(idx, edad_corta) %>% 
+  arrange(idx)
+
+# Gráfica estilizada y limpia
 ggplot(mx_plot, aes(x = idx, y = mx, color = factor(Año))) +
-  geom_line(size = 1) +
+  geom_line(size = 1.2, alpha = 0.8) +
+  geom_point(size = 1.5) + 
   scale_y_log10() +
+  scale_x_continuous(
+    breaks = etiquetas_edad$idx,
+    labels = etiquetas_edad$edad_corta
+  ) +
   facet_wrap(~Sexo, scales = "free_y") +
-  labs(x = "Grupo de edad", y = "log10(mx)", color = "Año") +
-  theme_minimal() +
-  theme(legend.position = "bottom")
+  labs(
+    x = "Edad (Límite inferior del intervalo)", 
+    y = "log10(mx)", 
+    color = "Año"
+  ) +
+  theme_minimal(base_size = 12) + 
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(), 
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, face = "bold"), 
+    strip.text = element_text(face = "bold", size = 13) 
+  )
 ```
 
 # g) Análisis de resultados
+
+El análisis de las tablas de vida para el estado de Jalisco en los años 2010, 2019 y 2021 permite identificar cambios importantes en los niveles de mortalidad y esperanza de vida de la población, diferenciados además por sexo. A partir de los resultados obtenidos, se observan tendencias demográficas consistentes con el proceso de envejecimiento poblacional y con los efectos recientes de la pandemia de COVID-19.
+
+### Incremento y posterior disminución de la esperanza de vida
+
+Los resultados muestran que entre 2010 y 2019 la esperanza de vida presentó una mejora gradual tanto en hombres como en mujeres. En 2010, la esperanza de vida al nacer fue de aproximadamente 73.45 años para hombres y 78.68 años para mujeres, mientras que para 2019 aumentó a 73.03 y 79.28 años respectivamente.
+
+Sin embargo, en 2021 se observa una disminución importante, principalmente en los hombres, cuya esperanza de vida descendió hasta 67.81 años. En las mujeres también hubo una reducción, aunque menor, alcanzando 75.16 años. Este comportamiento puede asociarse directamente al impacto de la pandemia por COVID-19, la cual incrementó considerablemente la mortalidad en edades adultas y avanzadas.
+
+La gráfica de evolución de la esperanza de vida muestra claramente esta tendencia: un crecimiento moderado entre 2010 y 2019 y una caída abrupta en 2021.
+
+### Diferencias de mortalidad entre hombres y mujeres
+
+En todos los años analizados, las mujeres presentan mayores niveles de esperanza de vida que los hombres. Esta diferencia es consistente con los patrones demográficos observados tanto en México como a nivel internacional.
+
+Las tablas de vida muestran que los hombres presentan mayores probabilidades de morir en edades jóvenes y adultas, especialmente entre los 15 y 39 años. Esto puede relacionarse con factores como:
+
+• Mayor exposición a accidentes y violencia.
+
+• Conductas de riesgo.
+
+• Mayor incidencia de homicidios en población masculina joven.
+
+• Menor utilización de servicios preventivos de salud.
+
+Por otro lado, las mujeres mantienen niveles de supervivencia más altos durante casi todos los grupos de edad, lo que se refleja en curvas de supervivencia más elevadas.
+
+### Comportamiento de las tasas específicas de mortalidad
+
+Las tasas específicas de mortalidad (mx) presentan el patrón típico de una población moderna:
+
+• Mortalidad relativamente alta en el primer año de vida. • Descenso importante durante la niñez.
+
+• Incremento gradual a partir de edades adultas.
+
+• Crecimiento acelerado en edades avanzadas.
+
+Las gráficas de mx en escala logarítmica permiten observar con mayor claridad cómo la mortalidad aumenta exponencialmente conforme avanza la edad.
+
+Además, se aprecia que en 2021 las tasas de mortalidad son mayores en comparación con 2019, especialmente en adultos mayores, lo cual nuevamente refleja el efecto de la pandemia.
+
+**Curvas de supervivencia (lx)**
+
+Las curvas de supervivencia muestran la disminución progresiva de sobrevivientes conforme aumenta la edad. En 2019 las curvas presentan una supervivencia más alta respecto a 2021, indicando mejores condiciones de mortalidad antes de la pandemia.
+
+Asimismo, las mujeres conservan mayores niveles de sobrevivencia en edades avanzadas, lo que evidencia una mayor longevidad femenina.
+
+### Envejecimiento poblacional
+
+Otro aspecto importante observado es el aumento de la mortalidad en edades avanzadas debido al proceso de envejecimiento poblacional en Jalisco. Conforme aumenta la proporción de personas adultas mayores, las defunciones se concentran más en grupos de edad altos, generando mayores valores de qx y mx después de los 60 años.
+
+Este fenómeno representa un reto importante para los sistemas de salud y seguridad social, ya que incrementa la demanda de atención médica y cuidados especializados.
+
+### Conclusiones generales
+
+En conclusión, las tablas de vida construidas permiten observar cambios importantes en la dinámica de mortalidad de Jalisco entre 2010 y 2021. Los resultados evidencian:
+
+• Una mejora general en la esperanza de vida hasta 2019.
+
+• Un fuerte impacto negativo de la pandemia en 2021.
+
+• Diferencias persistentes entre hombres y mujeres.
+
+• Un incremento acelerado de la mortalidad en edades avanzadas.
+
+• Evidencia del proceso de envejecimiento poblacional en la entidad.
+
+El uso de tablas de vida resulta fundamental para comprender el comportamiento demográfico de la población y para apoyar la toma de decisiones en áreas actuariales, de salud pública y planeación social
