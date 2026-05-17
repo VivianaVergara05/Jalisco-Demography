@@ -452,3 +452,17 @@ En conclusión, las tablas de vida construidas permiten observar cambios importa
 • Evidencia del proceso de envejecimiento poblacional en la entidad.
 
 El uso de tablas de vida resulta fundamental para comprender el comportamiento demográfico de la población y para apoyar la toma de decisiones en áreas actuariales, de salud pública y planeación social
+
+## Referencias
+
+Consejo Nacional de Población (CONAPO). (2010, 2019, 2021). *Proyecciones de la población de México y de las entidades federativas*. Recuperado de <https://www.gob.mx/conapo>
+
+Instituto Nacional de Estadística y Geografía (INEGI). (2010). *Censo de Población y Vivienda 2010*. Recuperado de <https://www.inegi.org.mx/programas/ccpv/2010/>
+
+Instituto Nacional de Estadística y Geografía (INEGI). (2020). *Censo de Población y Vivienda 2020*. Recuperado de <https://www.inegi.org.mx/programas/ccpv/2020/>
+
+Instituto Nacional de Estadística y Geografía (INEGI). (2019, 2021). *Registros administrativos de defunciones*. Recuperado de <https://www.inegi.org.mx/sistemas/olap/Proyectos/bd/continuas/mortalidad/defunciones_reg.asp>
+
+Coale, A. J., & Demeny, P. (1983). *Regional Model Life Tables and Stable Populations* (2nd ed.). Academic Press.
+
+Preston, S. H., Heuveline, P., & Guillot, M. (2001). *Demography: Measuring and Modeling Population Processes*. Blackwell Publishers.
