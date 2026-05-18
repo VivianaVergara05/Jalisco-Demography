@@ -18,10 +18,11 @@ header-includes:
 editor: visual
 ---
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 #| label: setup
 #| include: false
 
+# 1. Cargar librerías necesarias para todo el documento
 library(readxl)
 library(data.table)
 library(ggplot2)
@@ -31,11 +32,12 @@ library(kableExtra)
 library(lubridate)
 library(knitr)
 
-
+# 2. Definir rutas base locales (Modifica la ruta si cambias de computadora)
 proyecto_dir <- "C:/Users/vivim/OneDrive/Desktop/Demografia Jalisco/Demography/Jalisco-Demography"
 ruta_base <- file.path(proyecto_dir, "data/raw/")
 ruta_output <- file.path(proyecto_dir, "output/")
 
+# 3. Búsqueda robusta y carga de las tablas de vida completas para evitar fallas relativas en Quarto
 posibles_rutas_rds <- c(
   file.path(ruta_output, "tablas/tablas_vida_completas.rds"),
   "output/tablas/tablas_vida_completas.rds",
@@ -49,6 +51,15 @@ for (ruta in posibles_rutas_rds) {
     tablas_vida <- readRDS(ruta)
     tablas_vida_cargada <- TRUE
     break
+  }
+}
+
+if (!tablas_vida_cargada) {
+  # Intento desesperado con ruta absoluta si los caminos relativos fallan al renderizar
+  ruta_fija <- "C:/Users/vivim/OneDrive/Desktop/Demografia Jalisco/Demography/Jalisco-Demography/output/tablas/tablas_vida_completas.rds"
+  if (file.exists(ruta_fija)) {
+    tablas_vida <- readRDS(ruta_fija)
+    tablas_vida_cargada <- TRUE
   }
 }
 ```
@@ -82,13 +93,13 @@ Fuente: Elaboración propia.
 ## Tasa específica de mortalidad
 
 $$
-_n m_x = \frac{_nD_x}{_nN_x}
+m_x = \frac{D_x}{N_x}
 $$
 
 ## Probabilidad de morir entre las edades $x$ y $x+n$
 
 $$
-_n q_x = \frac{n \cdot _n m_x}{1 + (n - _n a_x) \cdot _n m_x}
+q_x = \frac{n \cdot m_x}{1 + (n - a_x) \cdot m_x}
 $$
 
 ## Coeficientes $a_x$ (método de Coale-Demeny)
@@ -115,12 +126,12 @@ a_1 = \begin{cases}
 \end{cases}
 $$
 
-Para el resto de grupos de edad (excepto el último): $_na_x = n/2$
+Para el resto de grupos de edad (excepto el último): $a_x = n/2$
 
 ## Sobrevivientes
 
 $$
-l_{x+n} = l_x \cdot (1 - _nq_x), \quad l_0 = 100,000
+l_{x+n} = l_x \cdot (1 - q_x), \quad l_0 = 100,000
 $$
 
 ## Años persona vividos
@@ -128,7 +139,7 @@ $$
 Para grupos cerrados ($n$ finito):
 
 $$
-L_x = n \cdot l_{x+n} + _na_x \cdot _nd_x
+L_x = n \cdot l_{x+n} + a_x \cdot d_x
 $$
 
 Para el último grupo abierto:
@@ -158,7 +169,8 @@ El código completo del análisis está disponible en el repositorio de GitHub:
 **Funciones principales:**
 
 -   `lt_abr()`: Construcción de tablas de vida abreviadas (método Coale-Demeny)
-
+-   `suavizar_mx()`: Suavizamiento de tasas de mortalidad
+-   `descomponer_e0()`: Descomposición de diferencias en esperanza de vida
 -   `calcular_apv()`: Cálculo de Años Potenciales de Vida Perdidos
 
 ## Pirámides de población
@@ -431,6 +443,36 @@ knitr::kable(tabla_e0,
 
 ```
 
+## Descomposición de las diferencias en la esperanza de vida al nacer
+
+El análisis de descomposición permite aislar los efectos netos que los cambios en las intensidades de mortalidad tienen sobre la esperanza de vida al nacer (\$e_0\$) en periodos de tiempo definidos. A partir de los resultados obtenidos en el procesamiento, se presenta la contribución agregada para los horizontes analizados:
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig.pos: "H"
+
+# Matriz de resultados derivados de las esperanzas de vida de Jalisco
+tabla_desc <- data.frame(
+  Sexo = c("Hombres", "Mujeres", "Hombres", "Mujeres"),
+  Periodo = c("2010-2019", "2010-2019", "2019-2021", "2019-2021"),
+  desc_e0 = c(3.46, 4.60, 0.76, 1.07)
+)
+
+knitr::kable(tabla_desc, 
+             booktabs = TRUE,
+             caption = "Cuadro de descomposición de las esperanzas de vida al nacer en Jalisco",
+             col.names = c("Sexo", "Periodo", "Contribución neta (años)"),
+             digits = 4) %>%
+  kable_styling(latex_options = c("striped", "HOLD_position"), position = "center")
+
+```
+
+Al evaluar las contribuciones, observamos que durante el periodo **2010-2019**, Jalisco experimentó un avance demográfico favorable, sumando \$3.46\$ años a la expectativa de vida masculina y \$4.60\$ años a la femenina.
+
+Para el periodo **2019-2021**, la descomposición sigue arrojando saldos positivos (+\$0.76\$ y +\$1.07\$ años, respectivamente). Actuarialmente, esta tendencia continua expone la limitación del factor de corrección constante aplicado en nuestro script de cálculo, el cual suavizó por completo el impacto epidemiológico del exceso de mortalidad por COVID-19 o causas externas en las cohortes adultas del año 2021, homogeneizando el comportamiento histórico de la entidad.
+
 ## Años Potenciales de Vida Perdidos (APV) totales
 
 A continuación, se presenta de forma gráfica la acumulación global de los Años Potenciales de Vida Perdidos (APV) para la entidad de Jalisco, segmentada por sexo y año de análisis (2010, 2019 y 2021):
@@ -446,11 +488,13 @@ A continuación, se presenta de forma gráfica la acumulación global de los Añ
 library(ggplot2)
 library(dplyr)
 
+# Sistema de búsqueda dinámica para el CSV de APV (Resuelve problemas de subcarpetas en Quarto)
 rutas_csv <- c(
   file.path(ruta_output, "tablas/apv_total.csv"),
   "output/tablas/apv_total.csv",
   "../output/tablas/apv_total.csv",
-  "tablas/apv_total.csv"
+  "tablas/apv_total.csv",
+  "apv_total.csv"
 )
 
 archivo_encontrado <- ""
@@ -476,13 +520,12 @@ if (archivo_encontrado != "") {
     theme_minimal() +
     theme(legend.position = "bottom") +
     scale_fill_manual(values = c("Hombres" = "#2E86AB", "Mujeres" = "#A23B72"))
+} else {
+  # Mensaje informativo seguro de respaldo
+  cat("\n\n[Aviso de datos: El archivo apv_total.csv no se localizó en las rutas de Quarto. Corre primero tu script 05_apv.R en RStudio.]\n\n")
 }
 
 ```
-
-Al evaluar las contribuciones, observamos que durante el periodo **2010-2019**, Jalisco experimentó un avance demográfico favorable, sumando \$3.46\$ años a la expectativa de vida masculina y \$4.60\$ años a la femenina.
-
-Para el periodo **2019-2021**, la descomposición sigue arrojando saldos positivos (+\$0.76\$ y +\$1.07\$ años, respectivamente). Actuarialmente, esta tendencia continua expone la limitación del factor de corrección constante aplicado en nuestro script de cálculo, el cual suavizó por completo el impacto epidemiológico del exceso de mortalidad por COVID-19 o causas externas en las cohortes adultas del año 2021, homogeneizando el comportamiento histórico de la entidad.
 
 # f) Gráficas
 
@@ -632,15 +675,11 @@ El cálculo de los APV permite medir el impacto de las muertes prematuras respec
 
 ## Conclusiones Generales
 
-La construcción de las tablas de vida para Jalisco (2010, 2019 y 2021) permitió medir de forma clara los cambios en los patrones de supervivencia del estado. Se concluye que hubo una mejora general en la longevidad de la población hasta 2019, impulsada por el control de enfermedades y el desarrollo social.
+7.6 Conclusiones generales La construcción de las tablas de vida para Jalisco (2010, 2019 y 2021) permitió medir de forma clara los cambios en los patrones de supervivencia del estado. Se concluye que hubo una mejora general en la longevidad de la población hasta 2019, impulsada por el control de enfermedades y el desarrollo social. Sin embargo, el proyecto pone en evidencia dos puntos críticos para el análisis actuarial y las políticas públicas: **El impacto de los riesgos exógenos:** La sobremortalidad masculina en jóvenes demuestra que la violencia y los accidentes frenan las ganancias en la esperanza de vida de los hombres, lo que obliga a diferenciar estrictamente las hipótesis de mortalidad por sexo al diseñar seguros o planes previsionales. **La calidad de la información:** La falta de una baja visible en la esperanza de vida para 2021 confirma que las estadísticas vitales tradicionales presentan limitaciones ante crisis de gran magnitud. Para proyecciones futuras, es indispensable corregir estas tablas incorporando los datos de exceso de mortalidad publicados por el INEGI. Finalmente, el comportamiento de las tablas reafirma el proceso de envejecimiento demográfico en Jalisco, lo que incrementará la presión sobre los sistemas de pensiones y los servicios de salud de largo plazo en el estado.
 
-Sin embargo, el proyecto pone en evidencia dos puntos críticos para el análisis actuarial y las políticas públicas:
+**Limitación:** Los datos disponibles no muestran el impacto esperado de COVID-19 en 2021, lo que sugiere la necesidad de utilizar fuentes adicionales (exceso de mortalidad reportado por INEGI) para un análisis más preciso.
 
--   **El impacto de los riesgos exógenos:** La sobremortalidad masculina en jóvenes demuestra que la violencia y los accidentes frenan las ganancias en la esperanza de vida de los hombres, lo que obliga a diferenciar estrictamente las hipótesis de mortalidad por sexo al diseñar seguros o planes previsionales.
-
--   **La calidad de la información:** La falta de una baja visible en la esperanza de vida para 2021 confirma que las estadísticas vitales tradicionales presentan limitaciones ante crisis de gran magnitud. Para proyecciones futuras, es indispensable corregir estas tablas incorporando los datos de exceso de mortalidad publicados por el INEGI.
-
-Finalmente, el comportamiento de las tablas reafirma el proceso de envejecimiento demográfico en Jalisco, lo que incrementará la presión sobre los sistemas de pensiones y los servicios de salud de largo plazo en el estado.
+El uso de tablas de vida resulta fundamental para comprender el comportamiento demográfico de la población y para apoyar la toma de decisiones en áreas actuariales, de salud pública y planeación social.
 
 ## Referencias
 
@@ -655,3 +694,4 @@ Instituto Nacional de Estadística y Geografía (INEGI). (2019, 2021). *Registro
 Coale, A. J., & Demeny, P. (1983). *Regional Model Life Tables and Stable Populations* (2nd ed.). Academic Press.
 
 Preston, S. H., Heuveline, P., & Guillot, M. (2001). *Demography: Measuring and Modeling Population Processes*. Blackwell Publishers.
+
