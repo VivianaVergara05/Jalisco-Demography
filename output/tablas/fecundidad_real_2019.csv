@@ -1,0 +1,13 @@
+"age_group","Jalisco","Mexico","Alemania"
+"15-19",58.74,63.359,7.126
+"20-24",107.52,111.712,33.997
+"25-29",104.63,104.11,83.114
+"30-34",79.48,74.593,108.88
+"35-39",43.07,38.694,62.24
+"40-44",11.21,10.075,13.642
+"45-49",0.89,0.808,0.663
+"Descripción",NA,NA,NA
+"Jalisco 2019: Nacimientos por edad de la madre obtenidos de INEGI y población femenina por grupos quinquenales de edad.",NA,NA,NA
+"Formula utilizada: TEF = (Nacimientos / Población femenina) * 1000",NA,NA,NA
+"México 2019: TEF obtenidas del portal de datos de Naciones Unidas (World Population Prospects).",NA,NA,NA
+"Alemania 2019: TEF obtenidas del portal de datos de Naciones Unidas (World Population Prospects).",NA,NA,NA

@@ -1,0 +1,13 @@
+"age_group","Jalisco_2019","Mexico_2019","Alemania_2019","Jalisco_2029","Mexico_2029","Alemania_2029"
+"15-19",58.74,63.359,7.126,53.1501499354323,57.3295939693404,6.98489574598394
+"20-24",107.52,111.712,33.997,97.2881191872264,101.081197643633,33.3238142964098
+"25-29",104.63,104.11,83.114,94.6731390491024,94.2026235917237,81.4682325332177
+"30-34",79.48,74.593,108.88,71.9164779854981,67.4945375235563,106.72403154964
+"35-39",43.07,38.694,62.24,38.9713475948088,35.0117790534834,61.0075654266125
+"40-44",11.21,10.075,13.642,10.1432274561831,9.11623698671229,13.3718703012508
+"45-49",0.89,0.808,0.663,0.805305302052004,0.731108633773055,0.649871720402379
+"Descripción",NA,NA,NA,NA,NA,NA
+"Jalisco 2019: Nacimientos por edad de la madre obtenidos de INEGI y población femenina por grupos quinquenales de edad.",NA,NA,NA,NA,NA,NA
+"Formula utilizada: TEF = (Nacimientos / Población femenina) * 1000",NA,NA,NA,NA,NA,NA
+"México 2019: TEF obtenidas del portal de datos de Naciones Unidas (World Population Prospects).",NA,NA,NA,NA,NA,NA
+"Alemania 2019: TEF obtenidas del portal de datos de Naciones Unidas (World Population Prospects).",NA,NA,NA,NA,NA,NA
