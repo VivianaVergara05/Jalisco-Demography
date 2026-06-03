@@ -1,21 +1,35 @@
 ---
-title: "Jalisco"
+title: ""
+subtitle: ""
 author: 
-  - "Viviana Vergara Galindo"
+  - "Viviana Montserrat Vergara Galindo"
   - "Claudia Areli Avila Melgarejo"
-date: "2026"
-format: 
+date: last-modified
+date-format: "MMMM, YYYY"
+format:
   pdf:
     toc: true
-    toc-depth: 2
     number-sections: true
     colorlinks: true
-    keep-tex: false
-    fig-pos: "H"
-header-includes:
-  - \usepackage{float}
-  - \floatplacement{figure}{H}
-editor: visual
+    geometry:
+      - top=25mm
+      - bottom=25mm
+      - left=30mm
+      - right=25mm
+    include-before: |
+      \begin{titlepage}
+      \centering
+      \vspace*{1cm}
+      \includegraphics[width=0.15\textwidth]{jalisco.jpg}\\[0.5cm]
+      {\Huge\bfseries Análisis Demográfico para el Estado de Jalisco \par}
+      \vspace{0.3cm}
+      {\Large Modelación de Funciones de Supervivencia, Tablas de Decrementos Múltiples y Dinámicas de Fecundidad \par}
+      \vspace{1.5cm}
+      {\large \textbf{Viviana Montserrat Vergara Galindo} \\
+      \textbf{Claudia Areli Avila Melgarejo} \par}
+      \vfill
+      {\large \today \par}
+      \end{titlepage}
 ---
 
 ```{r}
