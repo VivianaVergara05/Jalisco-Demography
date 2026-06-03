@@ -8,8 +8,7 @@
 ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 <!-- Imagen de Portada Oficial -->
-<img src="mapa_jalisco.png" width="85%" alt="Ubicación Geográfica de Jalisco en la República Mexicana" style="border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
-
+<img src="mapaJalisco.jpg" width="85%" alt="Ubicación Geográfica de Jalisco en la República Mexicana" style="border-radius: 8px; margin: 20px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">
 </div>
 
 ---
@@ -74,6 +73,7 @@ Jalisco-Demography/
 │       └── fecundidad_tef_2019.png
 │
 └── .gitig
+```
 ### 5. Explorador Dinámico del Proyecto
 
 *Haz clic en las carpetas que tienen una flecha para expandir y explorar interactivamente el árbol de archivos de este repositorio:*
